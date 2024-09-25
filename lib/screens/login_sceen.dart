@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:daelim/common/enums/sso_enum.dart';
+import 'package:daelim/common/extensions/context_extension.dart';
+import 'package:daelim/common/widgets/gradient_divider.dart';
 import 'package:daelim/config.dart';
 import 'package:easy_extension/easy_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 // ignore: unused_import
 import 'package:http/http.dart' as http;
@@ -43,14 +45,18 @@ class _LoginSrceenState extends State<LoginSrceen> {
 
   //로그인 버튼
   void _onSignIn() async {
+    final email = _emailController.text;
+    final password = _pwController.text;
     Log.cyan(_emailController.value.text);
     Log.cyan(_pwController.value.text);
 
-    final response = await http.post(Uri.parse(authUrl),
-        body: jsonEncode({
-          "email": _emailController.value.text,
-          "password": _pwController.value.text,
-        }));
+    final loginData = {
+      "email": email,
+      "password": password,
+    };
+
+    final response =
+        await http.post(Uri.parse(authUrl), body: jsonEncode(loginData));
 
     if (response.statusCode == 200) {
       Log.green("Success");
@@ -61,16 +67,27 @@ class _LoginSrceenState extends State<LoginSrceen> {
     }
   }
 
+  // NOTE:SSO 로그인 버튼
+  void _onSsoSignIn(SsoEnum type) {
+    // return context.showSnackBar("준비 중인 기능입니다.");
+    switch (type) {
+      case SsoEnum.google:
+      case SsoEnum.apple:
+      case SsoEnum.github:
+        context.showSnackBar("준비 중인 기능입니다.");
+        break;
+    }
+  }
+
   //타이틀 텍스트 위젯
   List<Widget> _buildTitleText() => [
-        Text("Hello Again",
-            style:
-                GoogleFonts.poppins(fontSize: 28, fontWeight: FontWeight.bold)),
+        const Text("Hello Again",
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
         15.heightBox,
-        Text(
+        const Text(
           "Wellcom back you've\nbeen missed!",
           textAlign: TextAlign.center,
-          style: GoogleFonts.poppins(
+          style: TextStyle(
             fontSize: 20,
           ),
         ),
@@ -134,44 +151,114 @@ class _LoginSrceenState extends State<LoginSrceen> {
                 : null));
   }
 
+// NOTE:SSO 버튼 위젯
+  Widget _buildSsoButton({
+    required String iconUrl,
+    //  Function()? onTap,
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+          width: 80,
+          height: 60,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(6)),
+          padding: const EdgeInsets.all(10),
+          child: Image.network(iconUrl)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFFDEDEE2),
         body: SafeArea(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                36.heightBox,
-                ..._buildTitleText(),
-                25.heightBox,
-                ..._buildTextFields(),
-                16.heightBox,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                      onPressed: _onRecoveryPassword,
-                      child: Text("Recovery Password",
-                          style: GoogleFonts.poppins(fontSize: 12))),
-                ),
-                16.heightBox,
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: _onSignIn,
-                      style: ElevatedButton.styleFrom(
+            child: DefaultTextStyle(
+              style: GoogleFonts.poppins(
+                  color: context.textTheme.bodyMedium?.color),
+              // color: Theme.of(context).textTheme.bodyMedium?.color),
+              //   color: Theme.of(context).brightness == Brightness.light
+              //       ? Colors.black
+              //       : Colors.white,
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  36.heightBox,
+                  ..._buildTitleText(),
+                  25.heightBox,
+                  ..._buildTextFields(),
+                  16.heightBox,
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: _onRecoveryPassword,
+                        child: const Text("Recovery Password",
+                            style: TextStyle(fontSize: 12))),
+                  ),
+                  16.heightBox,
+
+                  //로그인 버튼
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: _onSignIn,
+                        style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFE46A61),
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6))),
-                      child: Text(
-                        "Sign In",
-                        style: GoogleFonts.poppins(color: Colors.white),
-                      )),
-                )
-              ],
+                              borderRadius: BorderRadius.circular(6)),
+                        ),
+                        child: const Text(
+                          "Sign In",
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+
+                  32.heightBox,
+
+                  //Or Continue with
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: GradientDivider(
+                            // color: Colors.red,
+                            ),
+                      ),
+                      15.widthBox,
+                      const Text("Or Continue with"),
+                      15.widthBox,
+                      const Expanded(
+                        child: GradientDivider(
+                          reverse: true,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  //SSO Buttons
+
+                  32.heightBox,
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        //gestureDetector
+                        _buildSsoButton(
+                            onTap: () => _onSsoSignIn(SsoEnum.google),
+                            iconUrl: icGoogle),
+                        _buildSsoButton(
+                            onTap: () => _onSsoSignIn(SsoEnum.apple),
+                            iconUrl: icApple),
+                        _buildSsoButton(
+                            onTap: () => _onSsoSignIn(SsoEnum.github),
+                            iconUrl: icGithub),
+                      ])
+                ],
+              ),
             ),
           ),
           //     child: Center(
@@ -187,3 +274,5 @@ class _LoginSrceenState extends State<LoginSrceen> {
   }
 }
 //b눌러서 테마 변경
+
+//daelim-api.fleecy.dev/api-9847973

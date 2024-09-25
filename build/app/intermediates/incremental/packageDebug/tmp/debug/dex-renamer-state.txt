@@ -1,12 +1,12 @@
-#Mon Sep 16 02:28:00 KST 2024
-base.0=E\:\\githubWorkSpace\\flutter_daelim_2nd_smstr\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=E\:\\githubWorkSpace\\flutter_daelim_2nd_smstr\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=E\:\\githubWorkSpace\\flutter_daelim_2nd_smstr\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.3=E\:\\githubWorkSpace\\flutter_daelim_2nd_smstr\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+#Wed Sep 25 15:52:02 KST 2024
+base.0=/home/sooni/githubWorkspace/flutter_daelim_2nd_smstr/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/home/sooni/githubWorkspace/flutter_daelim_2nd_smstr/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
+base.2=/home/sooni/githubWorkspace/flutter_daelim_2nd_smstr/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.3=/home/sooni/githubWorkspace/flutter_daelim_2nd_smstr/build/app/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
-path.2=1/classes.dex
-path.3=0/classes.dex
+path.2=0/classes.dex
+path.3=1/classes.dex
 renamed.0=classes.dex
 renamed.1=classes2.dex
 renamed.2=classes3.dex

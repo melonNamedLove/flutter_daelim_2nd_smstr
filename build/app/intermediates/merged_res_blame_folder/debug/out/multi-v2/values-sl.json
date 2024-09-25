@@ -4,7 +4,7 @@
             "outputFile": "com.example.flutter_daelim_2nd_smstr.app-mergeDebugResources-25:/values-sl/values-sl.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\sooni\\.gradle\\caches\\transforms-3\\be14133980b5f6a2feb47282d511da70\\transformed\\core-1.13.1\\res\\values-sl\\values-sl.xml",
+                    "source": "/home/sooni/.gradle/caches/transforms-3/fac84cd5ecf1ec88a8c98571217c9350/transformed/core-1.13.1/res/values-sl/values-sl.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
