@@ -1,8 +1,12 @@
-import 'package:daelim/screens/login_sceen.dart';
+import 'package:daelim/helper/sotrage_helper.dart';
+import 'package:daelim/routes/app_router.dart';
+import 'package:daelim/screens/login/login_sceen.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageHelper.init();
   runApp(const MyApp());
 }
 
@@ -12,7 +16,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    // return MaterialApp(
+    return MaterialApp.router(
       theme: FlexThemeData.light(
         scheme: FlexScheme.purpleM3,
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
@@ -45,7 +50,14 @@ class MyApp extends StatelessWidget {
         swapLegacyOnMaterial3: true,
       ),
       themeMode: ThemeMode.system,
-      home: const LoginSrceen(),
+
+      // debugShowCheckedModeBanner: false, //debug 라벨 제거
+      // debugShowMaterialGrid: true,//격자보임
+//flutter web에서만 작동하지 않는 기능
+      showPerformanceOverlay: true,
+
+      // home: const LoginSrceen(),
+      routerConfig: appRouter,
     );
   }
 }

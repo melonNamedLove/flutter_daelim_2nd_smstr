@@ -9,7 +9,7 @@ extension BuildContextExtenstion on BuildContext {
   ) {
     ScaffoldMessenger.of(this).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        margin: const EdgeInsets.all(15),
         content: Text(text)));
   }
   /**

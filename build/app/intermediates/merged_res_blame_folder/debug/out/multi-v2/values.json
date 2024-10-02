@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.flutter_daelim_2nd_smstr.app-mergeDebugResources-25:/values/values.xml",
+            "outputFile": "com.example.flutter_daelim_2nd_smstr.app-mergeDebugResources-27:/values/values.xml",
             "map": [
                 {
                     "source": "/home/sooni/.gradle/caches/transforms-3/d47b1192960df52846144d82ac9e1d6f/transformed/jetified-window-1.2.0/res/values/values.xml",

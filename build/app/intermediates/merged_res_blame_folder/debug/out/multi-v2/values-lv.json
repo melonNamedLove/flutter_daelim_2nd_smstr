@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.flutter_daelim_2nd_smstr.app-mergeDebugResources-25:/values-lv/values-lv.xml",
+            "outputFile": "com.example.flutter_daelim_2nd_smstr.app-mergeDebugResources-27:/values-lv/values-lv.xml",
             "map": [
                 {
                     "source": "/home/sooni/.gradle/caches/transforms-3/fac84cd5ecf1ec88a8c98571217c9350/transformed/core-1.13.1/res/values-lv/values-lv.xml",
